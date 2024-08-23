@@ -4,6 +4,7 @@ import Header from './components/Header/Header'
 import Card from './components/Card/Card'
 import FeedbackList from './components/FeedbackList'
 import FeedbackData from './data/FeedbackData'
+import SharedCard from './components/shared/Card'
 // import NavBar from './components/NavBar/NavBar';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
       <div className='container'>
         {/* <Card /> */}
         <FeedbackList  feedback={feedback}/>
+        <SharedCard>
+          Comming from app.js
+        </SharedCard>
       </div>
       {/* <NavBar/> */}
     </>
