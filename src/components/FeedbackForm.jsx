@@ -34,7 +34,7 @@ const FeedbackForm = () => {
                     <input type="text" name="" id="" placeholder='write a message' onChange={handleChange} value={text} />
                     <Button version={'primary'} isDisabled={buttonDisabled}>Send</Button>
                 </div>
-                {/* <p style={color: 'red'}>(errorMessage ? errorMessage : '')</p> */}
+                <p style={{color: 'red'}}>{errorMessage ? errorMessage : ''}</p>
             </form>
         </Card>
     )
