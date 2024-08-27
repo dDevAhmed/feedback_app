@@ -3,14 +3,16 @@ import Card from '../components/shared/Card'
 import Button from '../components/shared/Button'
 import RatingSelect from '../components/RatingSelect'
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ handleAdd }) => {
 
     const [text, setText] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
+    const [rating, setRating] = useState(10);
 
     const handleChange = (e) => {
         setText(e.target.value);
+        // fixme - if 0
         if (text.length === '') {
             setButtonDisabled(true);
             setErrorMessage('Feedback should not be empty');
@@ -25,16 +27,28 @@ const FeedbackForm = () => {
         }
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newFeedback = {
+            text,
+            rating,
+        }
+        handleAdd(newFeedback);
+        setText(''); 
+        // fixme
+        setRating(10);
+    }
+
     return (
         <Card>
-            <form action=''>
+            <form action='' onSubmit={handleSubmit}>
                 <h2>How would you rate our service?</h2>
-                <RatingSelect />
+                <RatingSelect select={(buttonSelected) => { setRating(buttonSelected) }} />
                 <div className="input-group">
                     <input type="text" name="" id="" placeholder='write a message' onChange={handleChange} value={text} />
-                    <Button version={'primary'} isDisabled={buttonDisabled}>Send</Button>
+                    <Button type={'submit'} version={'primary'} isDisabled={buttonDisabled}>Send</Button>
                 </div>
-                <p style={{color: 'red'}}>{errorMessage ? errorMessage : ''}</p>
+                <p style={{ color: 'red' }}>{errorMessage ? errorMessage : ''}</p>
             </form>
         </Card>
     )

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
-import FeedbackItem from '../components/FeedbackItem'
+import { AnimatePresence, motion } from 'framer-motion';
+import FeedbackItem from '../components/FeedbackItem';
 
 const FeedbackList = ({ feedback, deleteFeedback }) => {
     console.log(feedback);
@@ -18,13 +19,18 @@ const FeedbackList = ({ feedback, deleteFeedback }) => {
         //         <FeedbackItem key={list.id} list={list}/>
         //     ))}
         // </div>
-        (feedback || feedback.length !== 0) && (
+        <AnimatePresence>
+            (feedback || feedback.length !== 0) && (
             <div className=''>
                 {feedback.map((list) => (
-                    <FeedbackItem key={list.id} list={list} deleteFeedback={deleteFeedback}/>
+                    <motion.div key={list.id} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{duration: 1}}>
+                        <FeedbackItem key={list.id} list={list} deleteFeedback={deleteFeedback} />
+                    </motion.div>
                 ))}
             </div>
-        )
+            )
+        </AnimatePresence>
+
     )
 }
 
