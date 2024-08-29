@@ -10,9 +10,7 @@ import SharedCard from './components/shared/Card'
 import FeedbackStat from './components/FeedbackStat'
 import FeedbackForm from './components/FeedbackForm'
 import Button from './components/shared/Button'
-// import Counter from './components/Counter'
-// import MyInput from './components/MyInput'
-// import TaskManager from './components/TaskManager'
+import { FeedbackProvider } from './components/FeedbackContext';
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -25,39 +23,29 @@ function App() {
     }
   }
 
-  const filteredFeedback = () => {
-
-  }
-
-  const averageRating = feedback.reduce((feedback, feedbackItem) => {
-    return feedback + feedbackItem.rating;
-  }, 0) / feedback.length
-
-  const handleAdd = () => {
-
-  }
-
   const addFeedback = (newFeedback) => {
     newFeedback.id = `leadway-${uuidv4()}`;    
     setFeedback([newFeedback, ...feedback]);
   }
 
+  const handleAdd = () => {
+
+  }
+
+  const filteredFeedback = () => {
+
+  }
+
   return (
-    <>
+    <FeedbackProvider>
       <Header />
       <div className='container'>
         <FeedbackForm handleAdd={addFeedback}/>
-        <FeedbackStat feedback={feedback} averageRating={feedback.length === 0 ? 0 : averageRating} />
-        <FeedbackList feedback={feedback} deleteFeedback={deleteFeedback} />
-        {/* <Button version={'secondary'}>App.js</Button> */}
-        {/* <SharedCard>
-          Coming from App.js
-        </SharedCard> */}
-        {/* <Counter /> */}
-        {/* <MyInput /> */}
-        {/* <TaskManager /> */}
+        <FeedbackStat />
+        <FeedbackList deleteFeedback={deleteFeedback} />
+        <a href=''><p></p>About Page</a>
       </div>
-    </>
+    </FeedbackProvider>
   );
 }
 
